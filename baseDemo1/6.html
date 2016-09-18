@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用script或template标签</title>
+</head>
+<script src="/vue.js"></script>
+<body>
+<p>
+    尽管语法糖简化了组件注册，但在template选项中拼接HTML元素比较麻烦，这就导致了HTML和JavaScript的高耦合性。Vue.js提供了两种方式将定义在javascript中的
+    html末班分离出来
+</p>
+
+<div id="app">
+    <my-component></my-component>
+</div>
+
+<!--使用<script>标签s-->
+<script type="text/x-template" id="myComponent">
+    <div>This is a component!</div>
+</script>
+<!--使用<script>标签e-->
+
+<!--使用template标签s-->
+<template id="myComponent">
+    <div>This is a component!</div>
+</template>
+<!--使用template标签e-->
+
+</body>
+
+<script>
+    Vue.component("my-component", {
+        template: '#myComponent'
+    })
+    new Vue({
+        el: '#app'
+    })
+</script>
+</html>

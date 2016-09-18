@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父组件和子组件</title>
+</head>
+<body>
+<div>
+    <h1>相关说明以及注意事项：</h1>
+    <ul>
+        <li>1.child组件是在Parent组件中注册的，所以只能在parent组件中使用，确切的说：子组件只能在父组件的template中使用。</li>
+        <li>2.列举了两种组件使用错误的情况，见part1,part2</li>
+    </ul>
+</div>
+<div class="part1">
+    <div id="app1">
+        <parent-component>
+            <child-component></child-component>
+        </parent-component>
+    </div>
+    <p>
+        无效：当子组件注册到父组件时，Vue.js会编译好父组件的模板，模板的内容已经决定了父组件将要渲染的HTML。
+        <parent-component></parent-component>
+        相当于运行时，
+        它的一些标签只会被当做普通的HTML标签元素被使用，但是因为子标签元素<child-component></child-component>不够规范，所以会直接被浏览器忽略掉。
+    </p>
+</div>
+<div class="part2">
+    <div id="app2">
+        <parent-component></parent-component>
+        <child-component></child-component>
+    </div>
+    <p>页面会提示错误</p>
+</div>
+<div id="appRight">
+    <parent-component></parent-component>
+</div>
+</body>
+<script src="/vue.js"></script>
+<script>
+    var child = Vue.extend({
+        template: '<p>This is a child component!</p>'
+    });
+    var parent = Vue.extend({
+        template: '<p>This is a parent component</p><child-component></child-component>',
+        components: {
+            'child-component': child
+        }
+    })
+    Vue.component('parent-component', Parent);
+    new Vue({
+        el: '#appRight'
+    });
+</script>
+</html>

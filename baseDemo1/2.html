@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深度理解组件的创建和注册</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>1. Vue.extend()是Vue构造器的扩展，调用Vue.extend()创建的是一个组件构造器，而不是一个具体的组件实例。</li>
+            <li>2. Vue.extend()构造器有一个选项对象，选项对象的template属性用于定义组件要渲染的HTML。</li>
+            <li>3. 使用Vue.component()注册组件时，需要提供两个参数，第一个参数是组件的标签，第二个参数是组件构造器。</li>
+            <li>4. Vue.component()方法内会调用组件构造器，创建一个组件实例</li>
+            <li>5. 组件应该挂载到某个Vue实例下，否则它不会生效。</li>
+        </ul>
+    </div>
+    <div id="app1">
+        <my-component></my-component>
+    </div>
+
+    <div id="app2">
+        <my-component></my-component>
+    </div>
+
+    <my-component></my-component>
+</body>
+<script src="/vue.js"></script>
+<script>
+    var myComponent = Vue.extend({
+        template: '<div>This is a component!</div>'
+    });
+    Vue.component('my-component', myComponent);
+    var app1 = new Vue({
+        el: '#app1'
+    });
+    var app2 = new Vue({
+        el: '#app2'
+    });
+    //该实例只会渲染id为app1或者id为app2的标签元素
+</script>
+</html>
