@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用props</title>
+</head>
+<body>
+    <p>
+        这意味着不能并且也不应该在子组件的模板内直接引用父组件的数据。可以使用props把数据传给子组件。
+    </p>
+<!--便于理解，可以将下面这个Vue实例看做my-component的父组件。如果我们想使用父组件的数据，则必须先在子组件中定义
+props属性，也就是props:['myName', 'myAge']这行代码-->
+    <template id="myComponent">
+        <table>
+            <tr>
+                <th colspan="2">
+                    子组件数据
+                </th>
+            </tr>
+            <tr>
+                <td>my name</td>
+                <td>{{myName}}}</td>
+            </tr>
+            <tr>
+                <td>my age</td>
+                <td>{{myAge}}}</td>
+            </tr>
+        </table>
+    </template>
+    <div id="app">
+        <my-component v-bind:my-name="name" v-bind:my-age="age"></my-component>
+    </div>
+</body>
+<script>
+//    定义一个子组件myComponent,在Vue实例中定义了data选项
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'keepfool',
+            age: 28
+        },
+        components: {
+            'my-component': {
+                template: '#myComponent',
+                props: ['myName', 'myAge']
+            }
+        }
+    });
+</script>
+</html>

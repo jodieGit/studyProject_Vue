@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的el和data选项</title>
+</head>
+<body>
+    <p>传入Vue构造器的多数选项也可以用在Vue.extend()或Vue.component()中，不过有两个特例：data和el</p>
+    <p>Vue.js规定：在定义组件选项时，data和el选项必须使用函数</p>
+</body>
+<script>
+//    <!-- 正确-->
+    Vue.component('my-component', {
+        data: function() {
+            return {a: 1}
+        }
+    });
+//    错误
+    Vue.component('my-component', {
+        data: {
+            a: 1
+        }
+    });
+</script>
+</html>
