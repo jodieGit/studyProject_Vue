@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prop绑定类型----双向绑定、单向绑定</title>
+</head>
+<body>
+    <!-- 双向绑定：可以使用.sync显示地指定双向绑定，这是的子组件的数据修改后会传回给父组件。-->
+    <my-component v-bind: my-name.sync="name" v-bind:my-age.sync="age"></my-component>
+
+    <!--单次绑定：可以使用.once显示的指定单次绑定，单次绑定在建立之后不会同步之后的变化，这意味着即使父组件修改了数据，也不会传导给子组件-->
+    <my-component v-bind：my-name.once="name" v-bind: my-age.once="age"></my-component>
+
+    <div id="app">
+        <div id="searchBar">
+            Search <input type="text" v-model = "searchQuery"/>
+        </div>
+        <simple-grid :data="gridData" :columns="gridColumns" :filter-key="searchQuery"></simple-grid>
+    </div>
+    <template id="grid-template">
+        <table>
+            <thead>
+                <tr>
+                    <th v-for="col in columns">
+                        {{col | capitalize}}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="entry in data | filterBy filterKey">
+                    <td v-for="col in columns">
+                        {{entry[col]}}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+</body>
+<script>
+    Vue.component('simple-grid',{
+        template: '#grid-template',
+        props: {
+            data: Array,
+            columns: Array,
+            filterKey: String
+        }
+    });
+    var demo = new Vue();
+</script>
+</html>

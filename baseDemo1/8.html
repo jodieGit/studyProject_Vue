@@ -32,7 +32,7 @@ props属性，也就是props:['myName', 'myAge']这行代码-->
     </div>
 </body>
 <script>
-//    定义一个子组件myComponent,在Vue实例中定义了data选项
+//    定义一个子组件my-component,在Vue实例中定义了data选项
     var vm = new Vue({
         el: '#app',
         data: {
@@ -47,4 +47,6 @@ props属性，也就是props:['myName', 'myAge']这行代码-->
         }
     });
 </script>
+<!--注意：在子组件中定义props时，使用了camelCase命名法。由于HTML特性不区分大小写，camelCase的prop用于特性时，需要转为kebab-case(短哼线隔开)。
+例如，在prop中定义的myName，在用作特性时需要转换为my-name-->
 </html>
